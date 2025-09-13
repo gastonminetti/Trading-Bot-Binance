@@ -3,8 +3,8 @@ import { Document } from 'mongoose';
 
 @Schema({ versionKey: false })
 export class Tick extends Document {
-  @Prop({ required: true }) symbol!: string;
-  @Prop({ required: true }) price!: number;
+  @Prop({ required: true, trim: true }) symbol!: string;
+  @Prop({ required: true, min: 0 }) price!: number;
   @Prop({ required: true }) eventTime!: number;
   @Prop({ default: () => Date.now() }) receivedAt!: number;
 }
