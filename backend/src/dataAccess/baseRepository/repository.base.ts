@@ -1,7 +1,7 @@
 import { Model, Document, FilterQuery, Query, UpdateQuery } from 'mongoose';
 import { IRepository } from './repository.interface';
 
-export abstract class baseRepository<TDoc extends Document>
+export abstract class BaseRepository<TDoc extends Document>
   implements IRepository<TDoc>
 {
   protected constructor(protected readonly model: Model<TDoc>) {}
