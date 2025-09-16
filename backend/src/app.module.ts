@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongoDbModule } from './common/mongo-db.module';
+import { MongoDbModule } from './dataAccess/mongo-db.module';
 
 @Module({
   imports: [MongoDbModule],
