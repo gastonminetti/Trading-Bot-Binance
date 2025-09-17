@@ -3,11 +3,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, FilterQuery } from 'mongoose';
 
 import { TickMongo } from '../Schemas/tick/tick.schema';
-import { TickRecord, NewTickRecord } from '../Schemas/tick/tick.record';
+import { TickRecord } from '../Schemas/tick/tick.record';
 import { Tick } from '../../businessLogic/tick/entity/tick.entity';
 
 import { BaseRepository } from '../baseRepository/repository.base';
-import { ITickRepository } from '../../businessLogic/tick/interfaces/tickRepository.interface';
+import { ITickRepository } from '../../businessLogic/tick/interfaces/tick.repository.interface';
 
 @Injectable()
 export class TickRepository
@@ -33,8 +33,7 @@ export class TickRepository
   async findById(id: string): Promise<Tick | null> {
     const record = await this.findEntityById(id);
     if (!record) return null;
-    const rec = record.toObject<TickRecord>();
-    return this.mapRecordToEntity(rec);
+    return this.mapRecordToEntity(record.toObject<TickRecord>());
   }
 
   async findMany(filter: FilterQuery<TickMongo> = {}): Promise<Tick[]> {
@@ -46,22 +45,22 @@ export class TickRepository
     return this.model.countDocuments({ symbol }).exec();
   }
 
-  protected mapEntityToRecord(e: Tick): NewTickRecord {
+  protected mapEntityToRecord(entity: Tick): TickRecord {
     return {
-      symbol: e.symbol,
-      price: e.price,
-      eventTime: e.eventTime,
-      receivedAt: e.receivedAt,
+      symbol: entity.symbol,
+      price: entity.price,
+      eventTime: entity.eventTime,
+      receivedAt: entity.receivedAt,
     };
   }
 
-  protected mapRecordToEntity(r: TickRecord): Tick {
+  protected mapRecordToEntity(record: TickRecord): Tick {
     return new Tick(
-      r.symbol,
-      r.price,
-      r.eventTime,
-      r.receivedAt,
-      r._id?.toString(),
+      record.symbol,
+      record.price,
+      record.eventTime,
+      record.receivedAt,
+      record._id?.toString(),
     );
   }
 }

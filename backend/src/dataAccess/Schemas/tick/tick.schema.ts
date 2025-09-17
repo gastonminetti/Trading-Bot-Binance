@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 
 @Schema({ versionKey: false, timestamps: false })
 export class TickMongo extends Document {
-  @Prop({ required: true, trim: true }) symbol!: string;
+  @Prop({ required: true, trim: true, uppercase: true }) symbol!: string;
   @Prop({ required: true, min: 0 }) price!: number;
   @Prop({ required: true }) eventTime!: number;
   @Prop({ default: () => Date.now() }) receivedAt!: number;
