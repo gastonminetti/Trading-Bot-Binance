@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, FilterQuery, Query } from 'mongoose';
+import { Model, FilterQuery } from 'mongoose';
 
 import { CandleMongo } from '../Schemas/candle/candle.schema';
 import { CandleRecord } from '../Schemas/candle/candle.record';
