@@ -20,7 +20,7 @@ export abstract class BaseRepository<TDoc extends Document>
     return this.model.find(filter).exec();
   }
 
-  async update(id: string, patch: Partial<TDoc>): Promise<void> {
+  async updateEntity(id: string, patch: Partial<TDoc>): Promise<void> {
     await this.model
       .updateOne({ _id: id } as FilterQuery<TDoc>, {
         $set: patch as UpdateQuery<TDoc>,
